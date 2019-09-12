@@ -145,7 +145,7 @@ Where,
 ```
 
 #### Example: Running a backup cron job script
-**If you wish to have a script named /home/backup.sh run every day at 3am, your crontab entry would look like this. First, install your cronjob by running the following command:** 
+**If you wish to have a script named ```/home/backup.sh``` run every day at 3am, your crontab entry would look like this. First, install your cronjob by running the following command:** 
 
 Append the following entry:
 ```
