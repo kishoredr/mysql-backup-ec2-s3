@@ -1,34 +1,33 @@
-# Automatized daily backup of Amazon RDS/MySQL Database from EC2 Instance to Amazon S3 using Shell Script and cron jobs
+# Automatic daily backup of Amazon RDS/MySQL Database from EC2 Instance to Amazon S3 using Shell Script and cron jobs
 
-Easy way and scalable solution for your Amazon RDS/MySQL Database backups by using  of Amazon RDS.
+Easy way and scalable solution for your Amazon RDS/MySQL Database backups by using of Amazon RDS.
 
-If you are not using RDS to host your databases, it is very probable that you are doing your own backups. In this article we'll see a very simple shell script to do automatic daily backups for your mysql databases into an S3 bucket.
+If you are not using RDS to host your databases, it is very probable that you are doing your own backups. In this project we'll see a very simple shell script to do automatic daily backups for your mysql databases into an S3 bucket.
 
-## What you need to upload your MySQL backups to S3
+## What you need to do to upload your MySQL backups to S3
 
-* Create S3 Bucket in AWS.
+* Create an S3 Bucket in AWS.
 * Configuring the AWS CLI.
-* Create access key/secret  for an IAM user.
-* S3cmd command line/AWS Cli tools configure on server 
-* Make Bash Script i.e Contains MySQL Credential ( Hostname, Username, DB Name ), Location on your server where you want to store dump (PATH), Log Path.
-* Give chmod +x on Shell Script (mysql-backup.sh)
+* Create access key/secret for an IAM user.
+* Configure S3 command line/AWS Cli tools on server 
+* Create Bash Script that contains MySQL credentials (Hostname, Username, DB Name) path to your server where you want to store dump (PATH), log path etc.,
+* Apply chmod +x on Shell Script (mysql-backup.sh)
 * Schedule with cron as per your requirement
 
-#### Create S3 Bucket in AWS
+### Create S3 Bucket in AWS
 ![Create S3 Bucket](https://docs.aws.amazon.com/AmazonS3/latest/gsg/images/flowCreateABucket.png)
 
-1. Sign in to the AWS Management Console and open the Amazon S3 console at  https://console.aws.amazon.com/s3/
-2. Choose Create bucket.
+1. Sign in to the AWS Management Console and open the Amazon S3 console at [AWS Console](https://console.aws.amazon.com/s3/)
+2. Choose ```Create bucket```
 3. In the Bucket name field, type a unique DNS-compliant name for your new bucket. (The example screen shot uses the bucket name admin-created. You cannot use this name because S3 bucket names must be unique.) Create your own bucket name using the following naming guidelines:
     * The name must be unique across all existing bucket names in Amazon S3.
     * After you create the bucket you cannot change the name, so choose wisely.
     * Choose a bucket name that reflects the objects in the bucket because the bucket name is visible in the URL that points to the objects that you're going to put in your bucket.
  4. For Region, choose US West (Oregon) as the region where you want the bucket to reside.
  5. Choose Create
- 
-       ![Create S3 Bucket](https://docs.aws.amazon.com/AmazonS3/latest/gsg/images/gsg-create-bucket-name-region.png)
+ 6. ![Create S3 Bucket](https://docs.aws.amazon.com/AmazonS3/latest/gsg/images/gsg-create-bucket-name-region.png)
 
-#### Configuring the AWS CLI
+### Configuring the AWS CLI
 This section explains how to configure the settings that the AWS Command Line Interface (AWS CLI) uses to interact with AWS, including your security credentials, the default output format, and the default AWS Region.
 
 * Note: AWS requires that all incoming requests are cryptographically signed. The AWS CLI does this for you. The               "signature" includes a date/time stamp. Therefore, you must ensure that your computer's date and time are set          correctly. If you don't, and the date/time in the signature is too far off of the date/time recognized by the          AWS service, then AWS rejects the request.
@@ -43,7 +42,7 @@ Default region name [None]: region name
 Default output format [None]: json
 ```
 
-#### Create access key/secret  for an IAM user.
+### Create access key/secret  for an IAM user.
 
 1. Sign in to the AWS Management Console and open the IAM console at https://console.aws.amazon.com/iam/.
 2. In the navigation pane, choose **Users.**
@@ -67,7 +66,7 @@ The ``` Default output format ``` specifies how the results are formatted. The v
 * **table**: The output is formatted as a table using the characters +|- to form the cell borders. It typically presents the information in a "human-friendly" format that is much easier to read than the others, but not as programmatically useful.
 
 #### Creating Profile
-If you use the command shown in the previous section, the result is a single profile named default. You can create additional configurations that you can refer to with a name by specifying the ``` --profile ``` option and assigning a name. The following example creates a profile named produser. You can specify credentials from a completely different account and region than the other profiles.
+If you use the command shown in the previous section, the result is a single profile named default. You can create additional configurations that you can refer to with a name by specifying the ``` --profile ``` option and assign a name. The following example creates a profile named produser. You can specify credentials from a completely different account and region than the other profiles.
 ```
 $ aws configure 
 AWS Access Key ID [None]: AKIAI44QH8DHBEXAMPLE
@@ -145,8 +144,8 @@ Where,
 ------------- Minute (0 - 59)
 ```
 
-#### Example: Run backup cron job script
-**If you wished to have a script named /home/backup.sh run every day at 3am, your crontab entry would look like as follows. First, install your cronjob by running the following command:** 
+#### Example: Running a backup cron job script
+**If you wish to have a script named /home/backup.sh run every day at 3am, your crontab entry would look like this. First, install your cronjob by running the following command:** 
 
 Append the following entry:
 ```
